@@ -1,5 +1,7 @@
 
 <resources>
+    <color name="ultra_zero">#00000000</color>
+    <color name="background">#dddddd</color>
     <color name="seed">#005db9</color>
     <color name="md_theme_light_primary">#005DB8</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>

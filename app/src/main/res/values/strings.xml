@@ -20,4 +20,7 @@
     <string name="depth">Depth: </string>
     <string name="potential">potential: </string>
     <string name="felt">Felt:</string>
+    <string name="still_working_for_this_feature">Still working for this feature</string>
+    <string name="shake_map">Shake Map</string>
+    <string name="something_is_wrong">Something is wrong, try again later</string>
 </resources>

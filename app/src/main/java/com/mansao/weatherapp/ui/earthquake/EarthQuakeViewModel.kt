@@ -14,6 +14,9 @@ class EarthQuakeViewModel: ViewModel() {
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private var _showToast = MutableLiveData<Boolean>()
+    val showToast: LiveData<Boolean> = _showToast
+
     private val _quakeData = MutableLiveData<QuakeResponse>()
     val quakeData: LiveData<QuakeResponse> = _quakeData
 
@@ -31,6 +34,7 @@ class EarthQuakeViewModel: ViewModel() {
             override fun onFailure(call: Call<QuakeResponse>, t: Throwable) {
                 _isLoading.postValue(false)
                 t.message?.let { Log.d(tag, it) }
+                _showToast.postValue(true)
             }
 
         })
