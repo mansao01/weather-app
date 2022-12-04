@@ -1,5 +1,6 @@
 package com.mansao.weatherapp.ui.earthquake
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,9 +29,13 @@ class EarthQuakeViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<QuakeResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                _isLoading.postValue(false)
+                t.message?.let { Log.d(tag, it) }
             }
 
         })
+    }
+    companion object{
+        const val tag = "EarthquakeViewModel"
     }
 }

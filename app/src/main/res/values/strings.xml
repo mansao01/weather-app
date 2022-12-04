@@ -11,4 +11,13 @@
     <string name="date">Date</string>
     <string name="location">Location</string>
     <string name="time">Time</string>
+    <string name="earthquake_detail">Earthquake Detail</string>
+    <string name="date_time">Date Time</string>
+    <string name="coordinate">Coordinate: </string>
+    <string name="latitude">Latitude: </string>
+    <string name="longitude">Longitude: </string>
+    <string name="magnitude">Magnitude: </string>
+    <string name="depth">Depth: </string>
+    <string name="potential">potential: </string>
+    <string name="felt">Felt:</string>
 </resources>
