@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mansao.weatherapp.R
+import com.mansao.weatherapp.data.network.response.WeatherResponse
 import com.mansao.weatherapp.databinding.FragmentWeatherBinding
 
 
@@ -31,11 +32,12 @@ class WeatherFragment : Fragment() {
 
         Toast.makeText(context, "Still working on this features", Toast.LENGTH_SHORT).show()
 
-
         showProgressBar(false)
         searchLocationWeather()
+        weatherViewModel.weatherResponse.observe(viewLifecycleOwner){
+            setData(it)
+        }
     }
-
 
     private fun searchLocationWeather(){
         val searchManager = context?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -50,7 +52,7 @@ class WeatherFragment : Fragment() {
                             showProgressBar(it)
                         }
                         weatherResponse.observe(viewLifecycleOwner){
-                            binding.tvCity.text = it.location.region
+                            setData(it)
                         }
                     }
                     return false
@@ -62,6 +64,11 @@ class WeatherFragment : Fragment() {
 
             })
         }
+    }
+
+    private fun setData(data: WeatherResponse){
+        binding.tvCity.text = data.location.region
+
     }
 
     private fun showProgressBar(state: Boolean) {

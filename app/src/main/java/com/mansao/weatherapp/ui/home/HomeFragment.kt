@@ -5,12 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.mansao.weatherapp.R
 import com.mansao.weatherapp.databinding.FragmentHomeBinding
+import timber.log.Timber
 
 class HomeFragment : Fragment() {
 
@@ -34,13 +34,16 @@ class HomeFragment : Fragment() {
         homeViewModel.apply {
             searchCityWeatherData("jakarta")
             weatherResponse.observe(viewLifecycleOwner) {
-                val iconUrl = "https:${it.current.condition.icon}"
-                Log.d("Home Fragment", iconUrl)
+                val iconUrl = StringBuilder(getString(R.string.https)).append(it.current.condition.icon)
+                Log.d(TAG, iconUrl.toString())
+                Timber.d(iconUrl.toString())
                 binding.apply {
                     textHome.text = it.location.name
-                    tvTempC.text = StringBuilder(it.current.tempC.toString()).append(getString(R.string.degree_celcius))
+                    tvTempC.text = StringBuilder(it.current.tempC.toString()).append(getString(R.string.degree_celsius))
+                    tvTempF.text = StringBuilder(it.current.tempF.toString()).append(getString(R.string.degree_fahrenheit))
+                    tvCondition.text = it.current.condition.text
                     Glide.with(context!!.applicationContext)
-                        .load(iconUrl)
+                        .load(iconUrl.toString())
                         .into(binding.ivWeather)
                 }
             }
@@ -63,5 +66,9 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+        private val TAG = HomeFragment::class.java.simpleName
     }
 }

@@ -33,7 +33,6 @@ class HomeViewModel : ViewModel() {
                     val responseBody = response.body()
                     _weatherResponse.postValue(responseBody)
                     _isLoading.postValue(false)
-
                 }
             }
 
@@ -41,7 +40,6 @@ class HomeViewModel : ViewModel() {
                 _isLoading.postValue(false)
                 t.printStackTrace()
             }
-
         })
     }
 }

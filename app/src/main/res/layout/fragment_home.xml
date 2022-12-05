@@ -23,8 +23,8 @@
 
     <ImageView
         android:id="@+id/iv_weather"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
         android:layout_marginStart="72dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/weather_icon"
@@ -37,11 +37,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_weather"
+        android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/iv_weather"
         app:layout_constraintTop_toTopOf="@+id/iv_weather"
         tools:text="32" />
+
+    <TextView
+        android:id="@+id/tv_temp_f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_weather"
+        app:layout_constraintStart_toEndOf="@+id/iv_weather"
+        tools:text="32" />
+
+    <TextView
+        android:id="@+id/tv_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="22sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temp_f"
+        tools:text="@string/condition" />
 
     <ProgressBar
         android:id="@+id/progressBar"
