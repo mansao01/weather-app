@@ -1,4 +1,4 @@
-package com.mansao.weatherapp.ui.home
+package com.mansao.weatherapp.ui.weather
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel() {
+class WeatherViewModel: ViewModel() {
 
     private val _weatherResponse = MutableLiveData<WeatherResponse>()
     val weatherResponse: LiveData<WeatherResponse> = _weatherResponse
@@ -18,18 +18,15 @@ class HomeViewModel : ViewModel() {
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-
-    fun searchCityWeatherData(location: String) {
+    fun searchCityWeather(location: String){
         _isLoading.postValue(true)
-
-        val client =
-            ApiConfig.getWeatherApiService().getCurrentWeather(BuildConfig.API_KEY, location)
-        client.enqueue(object : Callback<WeatherResponse> {
+        val client = ApiConfig.getWeatherApiService().getCurrentWeather( BuildConfig.API_KEY, location)
+        client.enqueue(object : Callback<WeatherResponse>{
             override fun onResponse(
                 call: Call<WeatherResponse>,
                 response: Response<WeatherResponse>
             ) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful){
                     val responseBody = response.body()
                     _weatherResponse.postValue(responseBody)
                     _isLoading.postValue(false)
