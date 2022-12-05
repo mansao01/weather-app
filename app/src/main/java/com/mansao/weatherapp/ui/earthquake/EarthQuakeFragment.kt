@@ -42,7 +42,7 @@ class EarthQuakeFragment : Fragment() {
             quakeData.observe(viewLifecycleOwner) {
                 binding.apply {
                     val url = it.data.shakemap
-                    //cardView2
+                    //cardView1
                     tvDate.text = it.data.tanggal
                     tvTime.text = it.data.jam
                     tvLocation.text = it.data.wilayah
