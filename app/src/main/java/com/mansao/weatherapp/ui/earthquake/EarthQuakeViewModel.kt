@@ -21,6 +21,7 @@ class EarthQuakeViewModel: ViewModel() {
     val quakeData: LiveData<QuakeResponse> = _quakeData
 
     fun getRecentQuake(){
+        _isLoading.postValue(true)
         val client = ApiConfig.getApiService().getRecentQuake()
         client.enqueue(object : Callback<QuakeResponse>{
             override fun onResponse(call: Call<QuakeResponse>, response: Response<QuakeResponse>) {
