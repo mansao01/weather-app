@@ -8,4 +8,7 @@ interface ApiService {
 
     @GET("quake")
     fun getRecentQuake(): Call<QuakeResponse>
+
+    @GET("")
+    fun getWeatherByCity()
 }

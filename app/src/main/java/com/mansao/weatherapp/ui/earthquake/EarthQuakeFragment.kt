@@ -27,6 +27,16 @@ class EarthQuakeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       showRecentEarthquakeData()
+        binding.apply {
+            swipeRefresh.setOnRefreshListener {
+                showRecentEarthquakeData()
+                swipeRefresh.isRefreshing = false
+            }
+        }
+    }
+
+    private fun showRecentEarthquakeData(){
         viewModel.apply {
             getRecentQuake()
             quakeData.observe(viewLifecycleOwner) {
@@ -66,7 +76,6 @@ class EarthQuakeFragment : Fragment() {
                 showErrorToast(it)
             }
         }
-
     }
 
     private fun showLoading(state: Boolean) {
