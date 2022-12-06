@@ -41,6 +41,7 @@ class HomeFragment : Fragment() {
                     tvTempC.text = StringBuilder(it.current.tempC.toString()).append(getString(R.string.degree_celsius))
                     tvTempF.text = StringBuilder(it.current.tempF.toString()).append(getString(R.string.degree_fahrenheit))
                     tvCondition.text = it.current.condition.text
+                    tvLocalTime.text = it.location.localtime
                     Glide.with(context!!.applicationContext)
                         .load(iconUrl.toString())
                         .into(binding.ivWeather)
