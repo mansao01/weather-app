@@ -11,7 +11,7 @@ interface ApiService {
     @GET("quake")
     fun getRecentQuake(): Call<QuakeResponse>
 
-    @GET("v1/current.json?")
+    @GET("v1/forecast.json?")
     fun getCurrentWeather(
         @Query("key")
         key: String,

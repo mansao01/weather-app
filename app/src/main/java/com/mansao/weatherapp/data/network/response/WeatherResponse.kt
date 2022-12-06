@@ -98,7 +98,7 @@ data class Current(
 	val windMph: Any,
 
 	@field:SerializedName("vis_km")
-	val visKm: Int,
+	val visKm: Any,
 
 	@field:SerializedName("humidity")
 	val humidity: Int,
@@ -107,7 +107,7 @@ data class Current(
 	val pressureMb: Any,
 
 	@field:SerializedName("vis_miles")
-	val visMiles: Int
+	val visMiles: Any
 )
 
 data class Condition(
