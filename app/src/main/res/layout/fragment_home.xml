@@ -40,7 +40,7 @@
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/iv_weather"
         app:layout_constraintTop_toTopOf="@+id/iv_weather"
-        tools:text="32" />
+        tools:text="32 °C" />
 
     <TextView
         android:id="@+id/tv_temp_f"
@@ -50,7 +50,7 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_weather"
         app:layout_constraintStart_toEndOf="@+id/iv_weather"
-        tools:text="32" />
+        tools:text="32 °F" />
 
     <TextView
         android:id="@+id/tv_condition"
