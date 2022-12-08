@@ -49,36 +49,36 @@ class HomeFragment : Fragment() {
 
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(context!!.applicationContext)
-        setAllData()
+//        setAllData()
         getLocation()
     }
 
-    private fun setAllData() {
-        homeViewModel.apply {
-            searchCityWeatherData("jakarta")
-            weatherResponse.observe(viewLifecycleOwner) {
-                val iconUrl =
-                    StringBuilder(getString(R.string.https)).append(it.current.condition.icon)
-                Log.d(TAG, iconUrl.toString())
-                Timber.d(iconUrl.toString())
-                binding.apply {
-                    textHome.text = it.location.name
-                    tvTempC.text =
-                        StringBuilder(it.current.tempC.toString()).append(getString(R.string.degree_celsius))
-                    tvTempF.text =
-                        StringBuilder(it.current.tempF.toString()).append(getString(R.string.degree_fahrenheit))
-                    tvCondition.text = it.current.condition.text
-                    tvLocalTime.text = it.location.localtime
-                    Glide.with(context!!.applicationContext)
-                        .load(iconUrl.toString())
-                        .into(binding.ivWeather)
-                }
-            }
-            isLoading.observe(viewLifecycleOwner) {
-                showProgressBar(it)
-            }
-        }
-    }
+//    private fun setAllData() {
+//        homeViewModel.apply {
+//            searchCityWeatherData("jakarta")
+//            weatherResponse.observe(viewLifecycleOwner) {
+//                val iconUrl =
+//                    StringBuilder(getString(R.string.https)).append(it.current.condition.icon)
+//                Log.d(TAG, iconUrl.toString())
+//                Timber.d(iconUrl.toString())
+//                binding.apply {
+//                    textHome.text = it.location.name
+//                    tvTempC.text =
+//                        StringBuilder(it.current.tempC.toString()).append(getString(R.string.degree_celsius))
+//                    tvTempF.text =
+//                        StringBuilder(it.current.tempF.toString()).append(getString(R.string.degree_fahrenheit))
+//                    tvCondition.text = it.current.condition.text
+//                    tvLocalTime.text = it.location.localtime
+//                    Glide.with(context!!.applicationContext)
+//                        .load(iconUrl.toString())
+//                        .into(binding.ivWeather)
+//                }
+//            }
+//            isLoading.observe(viewLifecycleOwner) {
+//                showProgressBar(it)
+//            }
+//        }
+//    }
 
     private fun isLocationIsEnable(): Boolean {
         val locationManager: LocationManager =
@@ -140,9 +140,41 @@ class HomeFragment : Fragment() {
                         binding.apply {
 
 //                            get latitude and longitude from gms
+                            val latitudeLongitude =
+                                "${list?.get(0)?.latitude},${list?.get(0)?.longitude}"
+                            Log.d(TAG, "Latitude&Longitude : $latitudeLongitude")
+
                             Log.d(TAG, "Latitude : ${list?.get(0)?.latitude}")
 
                             Log.d(TAG, "Latitude : ${list?.get(0)?.longitude}")
+                            homeViewModel.apply {
+                                searchCityWeatherData(latitudeLongitude)
+                                weatherResponse.observe(viewLifecycleOwner) {
+                                    val iconUrl =
+                                        StringBuilder(getString(R.string.https)).append(it.current.condition.icon)
+                                    Log.d(TAG, iconUrl.toString())
+                                    Timber.d(iconUrl.toString())
+                                    binding.apply {
+                                        textHome.text = it.location.name
+                                        tvTempC.text =
+                                            StringBuilder(it.current.tempC.toString()).append(
+                                                getString(R.string.degree_celsius)
+                                            )
+                                        tvTempF.text =
+                                            StringBuilder(it.current.tempF.toString()).append(
+                                                getString(R.string.degree_fahrenheit)
+                                            )
+                                        tvCondition.text = it.current.condition.text
+                                        tvLocalTime.text = it.location.localtime
+                                        Glide.with(context!!.applicationContext)
+                                            .load(iconUrl.toString())
+                                            .into(binding.ivWeather)
+                                    }
+                                }
+                                isLoading.observe(viewLifecycleOwner) {
+                                    showProgressBar(it)
+                                }
+                            }
                         }
                     }
                 }
