@@ -1,7 +1,8 @@
 package com.mansao.weatherapp.data.network.retrofit
 
+import com.mansao.weatherapp.data.network.response.FullWeatherResponse
 import com.mansao.weatherapp.data.network.response.QuakeResponse
-import com.mansao.weatherapp.data.network.response.WeatherResponse
+//import com.mansao.weatherapp.data.network.response.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,5 +18,5 @@ interface ApiService {
         key: String,
         @Query("q")
         q: String
-    ): Call<WeatherResponse>
+    ): Call<FullWeatherResponse>
 }

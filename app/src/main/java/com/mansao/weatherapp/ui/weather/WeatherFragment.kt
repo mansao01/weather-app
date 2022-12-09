@@ -11,7 +11,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mansao.weatherapp.R
-import com.mansao.weatherapp.data.network.response.WeatherResponse
+import com.mansao.weatherapp.data.network.response.FullWeatherResponse
+//import com.mansao.weatherapp.data.network.response.WeatherResponse
 import com.mansao.weatherapp.databinding.FragmentWeatherBinding
 
 
@@ -66,7 +67,7 @@ class WeatherFragment : Fragment() {
         }
     }
 
-    private fun setData(data: WeatherResponse){
+    private fun setData(data: FullWeatherResponse){
         binding.tvCity.text = data.location.region
 
     }
