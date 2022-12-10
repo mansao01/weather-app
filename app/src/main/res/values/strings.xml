@@ -33,4 +33,7 @@
     <string name="https">https:</string>
     <string name="condition">condition</string>
     <string name="local_time">Local Time</string>
+    <string name="forecast">Forecast</string>
+    <string name="temp_c">Temp C</string>
+    <string name="temp_f">Temp F</string>
 </resources>

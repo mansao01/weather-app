@@ -19,11 +19,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.mansao.weatherapp.R
 import com.mansao.weatherapp.databinding.FragmentHomeBinding
+import com.mansao.weatherapp.ui.adapter.ForecastWeatherListAdapter
 import timber.log.Timber
 import java.util.*
 
@@ -34,6 +37,7 @@ class HomeFragment : Fragment() {
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val permissionId = 2
+    private lateinit var adapter: ForecastWeatherListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,36 +53,16 @@ class HomeFragment : Fragment() {
 
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(context!!.applicationContext)
-//        setAllData()
+
+        adapter = ForecastWeatherListAdapter()
+        binding.apply {
+            rvForecast.setHasFixedSize(true)
+            rvForecast.adapter = adapter
+            rvForecast.layoutManager = GridLayoutManager(context,2, GridLayoutManager.HORIZONTAL, false)
+        }
         getLocation()
     }
 
-//    private fun setAllData() {
-//        homeViewModel.apply {
-//            searchCityWeatherData("jakarta")
-//            weatherResponse.observe(viewLifecycleOwner) {
-//                val iconUrl =
-//                    StringBuilder(getString(R.string.https)).append(it.current.condition.icon)
-//                Log.d(TAG, iconUrl.toString())
-//                Timber.d(iconUrl.toString())
-//                binding.apply {
-//                    textHome.text = it.location.name
-//                    tvTempC.text =
-//                        StringBuilder(it.current.tempC.toString()).append(getString(R.string.degree_celsius))
-//                    tvTempF.text =
-//                        StringBuilder(it.current.tempF.toString()).append(getString(R.string.degree_fahrenheit))
-//                    tvCondition.text = it.current.condition.text
-//                    tvLocalTime.text = it.location.localtime
-//                    Glide.with(context!!.applicationContext)
-//                        .load(iconUrl.toString())
-//                        .into(binding.ivWeather)
-//                }
-//            }
-//            isLoading.observe(viewLifecycleOwner) {
-//                showProgressBar(it)
-//            }
-//        }
-//    }
 
     private fun isLocationIsEnable(): Boolean {
         val locationManager: LocationManager =
@@ -169,6 +153,12 @@ class HomeFragment : Fragment() {
                                         Glide.with(context!!.applicationContext)
                                             .load(iconUrl.toString())
                                             .into(binding.ivWeather)
+
+                                        for(i in it.forecast.forecastday){
+                                            adapter.setListForecast(i.hour)
+
+                                        }
+
                                     }
                                 }
                                 isLoading.observe(viewLifecycleOwner) {
@@ -186,6 +176,10 @@ class HomeFragment : Fragment() {
         } else {
             requestPermission()
         }
+    }
+
+    private fun setWeatherListForecast(){
+
     }
 
     private fun showProgressBar(state: Boolean) {
