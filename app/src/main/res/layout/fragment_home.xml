@@ -18,11 +18,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_home"
+            app:layout_constraintTop_toBottomOf="@+id/tv_city"
             tools:text="@string/local_time" />
 
         <TextView
-            android:id="@+id/text_home"
+            android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"

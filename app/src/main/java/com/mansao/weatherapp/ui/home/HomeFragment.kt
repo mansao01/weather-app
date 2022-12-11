@@ -19,15 +19,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.mansao.weatherapp.R
+import com.mansao.weatherapp.data.network.response.FullWeatherResponse
 import com.mansao.weatherapp.databinding.FragmentHomeBinding
 import com.mansao.weatherapp.ui.adapter.ForecastWeatherListAdapter
-import timber.log.Timber
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -58,7 +57,8 @@ class HomeFragment : Fragment() {
         binding.apply {
             rvForecast.setHasFixedSize(true)
             rvForecast.adapter = adapter
-            rvForecast.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            rvForecast.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
         getLocation()
     }
@@ -121,49 +121,19 @@ class HomeFragment : Fragment() {
                         val geoCoder = context?.let { Geocoder(it, Locale.getDefault()) }
                         val list: MutableList<Address>? =
                             geoCoder?.getFromLocation(location.latitude, location.longitude, 1)
-                        binding.apply {
 
 //                            get latitude and longitude from gms
-                            val latitudeLongitude =
-                                "${list?.get(0)?.latitude},${list?.get(0)?.longitude}"
-                            Log.d(TAG, "Latitude&Longitude : $latitudeLongitude")
+                        val latitudeLongitude =
+                            "${list?.get(0)?.latitude},${list?.get(0)?.longitude}"
+                        Log.d(TAG, "Latitude&Longitude : $latitudeLongitude")
 
-                            Log.d(TAG, "Latitude : ${list?.get(0)?.latitude}")
-
-                            Log.d(TAG, "Latitude : ${list?.get(0)?.longitude}")
-                            homeViewModel.apply {
-                                searchCityWeatherData(latitudeLongitude)
-                                weatherResponse.observe(viewLifecycleOwner) {
-                                    val iconUrl =
-                                        StringBuilder(getString(R.string.https)).append(it.current.condition.icon)
-                                    Log.d(TAG, iconUrl.toString())
-                                    Timber.d(iconUrl.toString())
-                                    binding.apply {
-                                        textHome.text = it.location.name
-                                        tvTempC.text =
-                                            StringBuilder(it.current.tempC.toString()).append(
-                                                getString(R.string.degree_celsius)
-                                            )
-                                        tvTempF.text =
-                                            StringBuilder(it.current.tempF.toString()).append(
-                                                getString(R.string.degree_fahrenheit)
-                                            )
-                                        tvCondition.text = it.current.condition.text
-                                        tvLocalTime.text = it.location.localtime
-                                        Glide.with(context!!.applicationContext)
-                                            .load(iconUrl.toString())
-                                            .into(binding.ivWeather)
-
-                                        for(i in it.forecast.forecastday){
-                                            adapter.setListForecast(i.hour)
-
-                                        }
-
-                                    }
-                                }
-                                isLoading.observe(viewLifecycleOwner) {
-                                    showProgressBar(it)
-                                }
+                        homeViewModel.apply {
+                            searchCityWeatherData(latitudeLongitude)
+                            weatherResponse.observe(viewLifecycleOwner) {
+                                setAllData(it)
+                            }
+                            isLoading.observe(viewLifecycleOwner) {
+                                showProgressBar(it)
                             }
                         }
                     }
@@ -178,16 +148,41 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setWeatherListForecast(){
+    private fun setAllData(data: FullWeatherResponse) {
+        binding.apply {
+            val iconUrl =
+                StringBuilder(getString(R.string.https)).append(data.current.condition.icon)
+            tvCity.text = data.location.name
+            tvTempC.text =
+                StringBuilder(data.current.tempC.toString()).append(
+                    getString(R.string.degree_celsius)
+                )
+            tvTempF.text =
+                StringBuilder(data.current.tempF.toString()).append(
+                    getString(R.string.degree_fahrenheit)
+                )
+            tvCondition.text = data.current.condition.text
+            tvLocalTime.text = data.location.localtime
+            Glide.with(context!!.applicationContext)
+                .load(iconUrl.toString())
+                .into(binding.ivWeather)
 
+            for (i in data.forecast.forecastday) {
+                adapter.setListForecast(i.hour)
+
+            }
+        }
     }
 
     private fun showProgressBar(state: Boolean) {
         binding.apply {
             if (state) {
                 progressBar.visibility = View.VISIBLE
+                tvCity.visibility = View.GONE
             } else {
                 progressBar.visibility = View.GONE
+                tvCity.visibility = View.VISIBLE
+
             }
         }
     }
