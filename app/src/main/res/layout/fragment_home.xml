@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="@string/forecast"
+            android:text="@string/hourly_forecast"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"

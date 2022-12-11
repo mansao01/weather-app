@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
         binding.apply {
             rvForecast.setHasFixedSize(true)
             rvForecast.adapter = adapter
-            rvForecast.layoutManager = GridLayoutManager(context,2, GridLayoutManager.HORIZONTAL, false)
+            rvForecast.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
         getLocation()
     }
