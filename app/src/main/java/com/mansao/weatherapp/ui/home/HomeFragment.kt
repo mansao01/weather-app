@@ -167,6 +167,9 @@ class HomeFragment : Fragment() {
                 .load(iconUrl.toString())
                 .into(binding.ivWeather)
 
+            //inside cardView air Quality
+            tvUv.text = data.current.uv.toString()
+
             for (i in data.forecast.forecastday) {
                 adapter.setListForecast(i.hour)
 

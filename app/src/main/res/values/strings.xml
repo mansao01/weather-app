@@ -36,4 +36,7 @@
     <string name="hourly_forecast">Hourly Forecast</string>
     <string name="temp_c">Temp C</string>
     <string name="temp_f">Temp F</string>
+    <string name="air_quality">Air Quality</string>
+    <string name="uv">UV</string>
+    <string name="one">1</string>
 </resources>
