@@ -39,4 +39,7 @@
     <string name="air_quality">Air Quality</string>
     <string name="uv">UV</string>
     <string name="one">1</string>
+    <string name="ion">Ion</string>
+    <string name="a_hundred">110.0</string>
+    <string name="humidity">Humidity</string>
 </resources>

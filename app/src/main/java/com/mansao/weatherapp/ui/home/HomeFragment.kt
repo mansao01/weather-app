@@ -169,6 +169,8 @@ class HomeFragment : Fragment() {
 
             //inside cardView air Quality
             tvUv.text = data.current.uv.toString()
+            tvIon.text = data.location.lon.toString()
+            tvHumidity.text = data.current.humidity.toString()
 
             for (i in data.forecast.forecastday) {
                 adapter.setListForecast(i.hour)
