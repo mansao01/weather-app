@@ -184,10 +184,21 @@ class HomeFragment : Fragment() {
             if (state) {
                 progressBar.visibility = View.VISIBLE
                 tvCity.visibility = View.GONE
+                textView4.visibility  = View.GONE
+                textView5.visibility  = View.GONE
+                textView6.visibility  = View.GONE
+                tvUv.visibility = View.GONE
+                tvIon.visibility = View.GONE
+                tvHumidity.visibility = View.GONE
             } else {
                 progressBar.visibility = View.GONE
                 tvCity.visibility = View.VISIBLE
-
+                textView4.visibility  = View.VISIBLE
+                textView5.visibility  = View.VISIBLE
+                textView6.visibility  = View.VISIBLE
+                tvUv.visibility = View.VISIBLE
+                tvIon.visibility = View.VISIBLE
+                tvHumidity.visibility = View.VISIBLE
             }
         }
     }
