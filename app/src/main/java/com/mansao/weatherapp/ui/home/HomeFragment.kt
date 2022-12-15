@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationServices
 import com.mansao.weatherapp.R
 import com.mansao.weatherapp.data.network.response.FullWeatherResponse
 import com.mansao.weatherapp.databinding.FragmentHomeBinding
+import com.mansao.weatherapp.ui.ListForecastActivity
 import com.mansao.weatherapp.ui.adapter.ForecastWeatherListAdapter
 import java.util.*
 
@@ -171,6 +172,12 @@ class HomeFragment : Fragment() {
             tvUv.text = data.current.uv.toString()
             tvIon.text = data.location.lon.toString()
             tvHumidity.text = data.current.humidity.toString()
+
+            imgMoreForecast.setOnClickListener {
+                val intent = Intent(context, ListForecastActivity::class.java)
+                intent.putExtra(ListForecastActivity.EXTRA_DATA, data)
+                startActivity(intent)
+            }
 
             for (i in data.forecast.forecastday) {
                 adapter.setListForecast(i.hour)

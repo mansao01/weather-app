@@ -223,6 +223,7 @@
             tools:listitem="@layout/weather_forecast_list" />
 
         <ImageView
+            android:id="@+id/img_more_forecast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
